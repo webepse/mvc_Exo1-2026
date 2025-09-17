@@ -20,7 +20,9 @@ function getPosts(): array|null
 {
     $bdd = dbConnect();
     $posts = $bdd->query("SELECT id, title, content, DATE_FORMAT(creation_date,'%d/%m/%Y') FROM posts");
-    return $posts->fetchAll(PDO::FETCH_ASSOC);
+    $data =  $posts->fetchAll(PDO::FETCH_ASSOC);
+    $posts->closeCursor();
+    return $data;
 }
 
 /***
@@ -35,7 +37,9 @@ function getPost(int $id): array|null
     //$post->execute(['id' => $id]);
     $post->bindParam(':id', $id, PDO::PARAM_INT);
     $post->execute();
-    return $post->fetch(PDO::FETCH_ASSOC);
+    $data = $post->fetch(PDO::FETCH_ASSOC);
+    $post->closeCursor();
+    return $data;
 }
 
 
