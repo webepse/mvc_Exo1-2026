@@ -14,6 +14,11 @@ function listPosts(){
     require "view/listPostsView.php";
 }
 
+/**
+ * Permet d'afficher un post particulier avec l'aide de l'id
+ * @param int $id
+ * @return void
+ */
 function post(int $id){
     $id = htmlspecialchars($id);
     $post = getPost($id);
