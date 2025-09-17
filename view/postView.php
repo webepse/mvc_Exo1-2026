@@ -8,12 +8,16 @@
 
 <div class="row">
     <h2>Les commentaires</h2>
-    <?php foreach ($comments as $comment) : ?>
-        <div class="col-md-8 my-3 bg-light p-3">
-            <h4><?= $comment['author'] ?> - <?= $comment['mydate'] ?></h4>
-            <p><?= nl2br($comment['comment']) ?></p>
-        </div>
-    <?php endforeach; ?>
+    <?php if (empty($comments)) : ?>
+        <p>Il n'y a pas encore de commentaire</p>
+    <?php else: ?>
+        <?php foreach ($comments as $comment) : ?>
+            <div class="col-md-8 my-3 bg-light p-3">
+                <h4><?= $comment['author'] ?> - <?= $comment['mydate'] ?></h4>
+                <p><?= nl2br($comment['comment']) ?></p>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>
 
 <?php
