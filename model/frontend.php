@@ -42,6 +42,22 @@ function getPost(int $id): array|false|null
     return $data;
 }
 
+/**
+ * Permet de récup les commentaires d'un post
+ * @param int $idPost
+ * @return array|false|null
+ */
+function getComments(int $idPost): array|false|null
+{
+    $bdd = dbConnect();
+    $comments = $bdd->prepare("SELECT id, comment, author, DATE_FORMAT(comment_date,'%d/%m/%Y à %Hh%i') as mydate FROM comments WHERE post_id = :id ORDER BY comment_date DESC");
+    $comments->bindParam(':id', $idPost, PDO::PARAM_INT);
+    $comments->execute();
+    $data = $comments->fetchAll(PDO::FETCH_ASSOC);
+    $comments->closeCursor();
+    return $data;
+}
+
 
 
 

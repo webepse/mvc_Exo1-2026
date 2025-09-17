@@ -22,6 +22,7 @@ function listPosts(){
 function post(int $id){
     $id = htmlspecialchars($id);
     $post = getPost($id);
+    $comments = getComments($id);
 
     if($post == null){
         header("LOCATION: 404.php");
