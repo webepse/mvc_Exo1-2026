@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><?= $post['title'] ?></h5>
                     <p class="card-text"><?= $post['content'] ?></p>
-                    <a href="#" class="btn btn-primary my-2">Lire la suite</a>
+                    <a href="index.php?action=post&id=<?= $post['id'] ?>" class="btn btn-primary my-2">Lire la suite</a>
                 </div>
             </div>
         </div>
@@ -23,4 +23,3 @@
     $content = ob_get_clean();
     require "template.php";
 ?>
-

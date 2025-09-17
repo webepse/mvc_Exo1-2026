@@ -14,9 +14,9 @@ function dbConnect(): PDO
 
 /**
  * Permet de faire une requête à la bdd sur tous les posts
- * @return array|null
+ * @return array|null|false
  */
-function getPosts(): array|null
+function getPosts(): array|false|null
 {
     $bdd = dbConnect();
     $posts = $bdd->query("SELECT id, title, content, DATE_FORMAT(creation_date,'%d/%m/%Y') FROM posts");
@@ -28,12 +28,12 @@ function getPosts(): array|null
 /***
  * Permet de récup un post en particulier
  * @param int $id
- * @return array|null
+ * @return array|null|false
  */
-function getPost(int $id): array|null
+function getPost(int $id): array|false|null
 {
     $bdd = dbConnect();
-    $post = $bdd->prepare("SELECT id, title, content, DATE_FORMAT(creation_date,'%d/%m/%Y') FROM posts WHERE id = :id");
+    $post = $bdd->prepare("SELECT id, title, content, DATE_FORMAT(creation_date,'%d/%m/%Y') as mydate FROM posts WHERE id = :id");
     //$post->execute(['id' => $id]);
     $post->bindParam(':id', $id, PDO::PARAM_INT);
     $post->execute();
